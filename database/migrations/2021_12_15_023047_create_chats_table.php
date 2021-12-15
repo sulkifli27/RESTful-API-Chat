@@ -18,7 +18,7 @@ class CreateChatsTable extends Migration
             $table->foreignId('sender_id')->constrained('users')->onUpdate('cascade')->onDelete('restrict');
             $table->foreignId('receiver_id')->constrained('users')->onUpdate('cascade')->onDelete('restrict');
             $table->string("message");
-            $table->integer("status_read");
+            $table->integer("status_read")->default(0);
             $table->timestamps();
         });
     }

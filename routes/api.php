@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\AuthController;
+use App\Http\Controllers\Api\ChatController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -17,3 +18,6 @@ use Illuminate\Support\Facades\Route;
 
 // login
 Route::post('login', [AuthController::class, 'login']);
+
+// chat
+Route::post('send/chat/{receiverId}', [ChatController::class, 'sendChat'])->middleware(['auth:api']);
