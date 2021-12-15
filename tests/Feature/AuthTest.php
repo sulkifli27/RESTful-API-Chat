@@ -39,11 +39,11 @@ class AuthTest extends TestCase
     public function test_UserLoginSuccess()
     {
         $user = User::factory()->create([
-            'email' => 'testlogin@user.com',
-            'password' => bcrypt('toptal123'),
+            'email' => 'sul@gamil.com',
+            'password' => bcrypt('12345678'),
         ]);
 
-        $body = ['email' => 'testlogin@user.com', 'password' => 'toptal123'];
+        $body = ['email' => 'sul@gamil.com', 'password' => '12345678'];
         $this->json('POST', 'api/login', $body)
             ->assertStatus(200)
             ->assertJson([
