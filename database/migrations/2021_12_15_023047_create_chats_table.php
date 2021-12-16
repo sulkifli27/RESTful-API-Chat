@@ -15,8 +15,8 @@ class CreateChatsTable extends Migration
     {
         Schema::create('chats', function (Blueprint $table) {
             $table->id();
-            $table->integer('sender_id');
-            $table->foreignId('receiver_id')->constrained('users')->onUpdate('cascade')->onDelete('restrict');
+            $table->integer('receiver_id');
+            $table->foreignId('sender_id')->constrained('users')->onUpdate('cascade')->onDelete('restrict');
             $table->string("message");
             $table->integer("status_read")->default(0);
             $table->timestamps();

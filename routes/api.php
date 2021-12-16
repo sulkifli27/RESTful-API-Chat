@@ -21,3 +21,8 @@ Route::post('login', [AuthController::class, 'login']);
 
 // chat
 Route::post('send/chat/{receiverId}', [ChatController::class, 'sendChat'])->middleware(['auth:api']);
+Route::get('message', [ChatController::class, 'getMessage'])->middleware(['auth:api']);
+Route::post('replay/chat/{receiverId}', [ChatController::class, 'replyChat'])->middleware(['auth:api']);
+Route::get('message/detail/{sender_id}', [ChatController::class, 'getMeesageDetail'])->middleware(['auth:api']);
+Route::get('message/last/{sender_id}', [ChatController::class, 'getLastMessage'])->middleware(['auth:api']);
+Route::get('count/{sender_id}', [ChatController::class, 'countMessage'])->middleware(['auth:api']);

@@ -51,7 +51,7 @@ class ChatTest extends TestCase
     public function test_SuccesSendMessage()
     {
         $user = User::factory()->create([
-            'email' => 'sul@gamil.com',
+            'email' => 'sulss@gamil.com',
             'password' => bcrypt('12345678'),
         ]);
 
@@ -71,6 +71,113 @@ class ChatTest extends TestCase
             ->assertStatus(200)
             ->assertJson([
                 "status" => "success",
+            ]);
+    }
+
+    public function test_GetMessage()
+    {
+        $user = User::factory()->create([
+            'email' => 'sul43545@gamil.com',
+            'password' => bcrypt('12345678'),
+        ]);
+
+        $token = $user->createToken('nApp')->accessToken;
+        $headers = ['Authorization' => "Bearer $token"];
+
+        $this->withoutExceptionHandling();
+
+        $this->json('GET', 'api/message', [], $headers, ['Accept' => 'application/json'])
+            ->assertStatus(200)
+            ->assertJson([
+                "status" => "success",
+                "data" => []
+            ]);
+    }
+
+    public function test_SuccesReplayMessage()
+    {
+        $user = User::factory()->create([
+            'email' => 'sulss@gamil.com',
+            'password' => bcrypt('12345678'),
+        ]);
+
+        $token = $user->createToken('nApp')->accessToken;
+        $headers = ['Authorization' => "Bearer $token"];
+
+        $payload = [
+            "sender_id" => 1,
+            "receiver_id" => 2,
+            'message' => 'Hallo'
+        ];
+
+        $this->withoutExceptionHandling();
+
+
+        $this->json('POST', 'api/replay/chat/1', $payload, $headers, ['Accept' => 'application/json'])
+            ->assertStatus(200)
+            ->assertJson([
+                "status" => "success",
+                "data" => []
+            ]);
+    }
+
+    public function test_DetailGetMessage()
+    {
+        $user = User::factory()->create([
+            'email' => 'sul43545@gamil.com',
+            'password' => bcrypt('12345678'),
+        ]);
+
+        $token = $user->createToken('nApp')->accessToken;
+        $headers = ['Authorization' => "Bearer $token"];
+
+        $this->withoutExceptionHandling();
+
+        $this->json('GET', 'api/message/detail/1', [], $headers, ['Accept' => 'application/json'])
+            ->assertStatus(200)
+            ->assertJson([
+                "status" => "success",
+                "data" => []
+            ]);
+    }
+
+    public function test_GetLastMessage()
+    {
+        $user = User::factory()->create([
+            'email' => 'sul43545@gamil.com',
+            'password' => bcrypt('12345678'),
+        ]);
+
+        $token = $user->createToken('nApp')->accessToken;
+        $headers = ['Authorization' => "Bearer $token"];
+
+        $this->withoutExceptionHandling();
+
+        $this->json('GET', '/api/message/last/1', [], $headers, ['Accept' => 'application/json'])
+            ->assertStatus(200)
+            ->assertJson([
+                "status" => "success",
+                "data" => []
+            ]);
+    }
+
+    public function test_CountMessage()
+    {
+        $user = User::factory()->create([
+            'email' => 'sul43545@gamil.com',
+            'password' => bcrypt('12345678'),
+        ]);
+
+        $token = $user->createToken('nApp')->accessToken;
+        $headers = ['Authorization' => "Bearer $token"];
+
+        $this->withoutExceptionHandling();
+
+        $this->json('GET', '/api/count/1', [], $headers, ['Accept' => 'application/json'])
+            ->assertStatus(200)
+            ->assertJson([
+                "status" => "success",
+                "data" => ""
             ]);
     }
 }
